@@ -1,0 +1,55 @@
+{% extends 'base.html'%}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static '/dev/style.css' %}">
+<title> Добавление нового оборудования </title>
+{% endblock %}
+
+{% block content %}
+<!--div class="container clearfix">-->
+    <div class="message">
+        {% if errors %}
+        <div class="error">{{errors}}</div>
+        {% endif %}
+        {% if accept %}
+        <div class="accept">
+            <h2>оборудование успешно добавлено!</h2>
+        </div>
+        {% endif %}
+    </div>
+ <!--/div>-->
+<div class="container clearfix">
+    <div class="container-title add clearfix">
+        <h1>Добавление нового оборудования</h1>
+    </div>
+</div> 
+<div class="container clearfix">
+    <form autocomplete="on" action=""  method="POST">
+        {% csrf_token %}
+        {{ form.management_form }}
+        {% for f in form %}
+        {% if f.label == 'Type dev' or f.label == 'Buildings' or f.label == 'Employ'%}
+        <div class="form-row">
+            {{f.label_tag}}
+            <input type="hidden" id="{{ f.label }}">
+            {{ f }}
+        </div>
+            {% else %}
+        <div class="form-row">
+            {{f.label_tag}}
+            {{ f }}
+        </div>
+            {% endif %}
+            {% endfor %}
+        <div class="form-submit-row">
+            <input class="search-button" type="submit", value="Save">
+        </div>    
+        
+    </form>
+</div> 
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'dev/js/create.js'%}"></script>
+{% endblock %}

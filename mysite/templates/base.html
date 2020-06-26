@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{% static 'dev/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'dev/plugin.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'dev/font/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <script src="{% static 'dev/js/main.js'%}"></script>        
+        {% block head %}
+        {% endblock %}
+        <script src="https://code.jquery.com/jquery-3.5.1.js"> </script>
+    </head>
+    <body>
+        <div class="wrapper clearfix">
+            <header>
+            <div class="container-header clearfix">
+                <div class="container-logo"> 
+                    <span>
+                        <a href="{% url 'index' %}"><img class="logo" src="https://rosakhutor.com/html/img/logo.svg"></a>
+                    </span>                   
+                </div>
+                <div class="container-menu">
+                    <nav>
+                        <ul class="menu">
+                            <li>
+                                <a href="{% url 'hardware' %}">оборудование</a>
+                            </li>
+                            <li>
+                                <a href="#">сотрудники</a>
+                            </li>
+                            <li>
+                                <a href="#">сим-карты</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'printers' %}">принтеры</a>
+                            </li>
+                            <li>
+                                <a href="#">инфо</a>
+                            </li>
+                        </ul>     
+                    </nav>
+                </div>
+                <div class="container-search">
+                    <form action="{% url 'hardware' %}" class="search-form">
+                        <input type="search" class="search-input" placeholder="Search" name="search">
+                        <button type="submit" class="search-button">
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+            </header>
+        {% block content%}
+        {% endblock %}
+            <footer class="footer clearfix">
+                Роза Хутор
+            </footer>
+        </div>
+        {% block scripts %}
+        {% endblock %}
+    </body>
+</html>

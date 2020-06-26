@@ -1,0 +1,154 @@
+{% extends 'base.html'%}
+{% load static %}
+
+
+{% block head %}
+<title> Оборудование </title>
+{% endblock %}
+
+{% block content %}
+<div class="container clearfix">
+    <div class="container-search clearfix">
+        <a class="search-button add-btn" href="{% url 'createHardware' %}">ADD 
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+    </div> 
+    <div class="container-title clearfix">
+        <h1>оборудование</h1>
+    </div>
+</div>
+<div class="container clearfix">
+    <div class="container-inner">
+        <table>
+            <thead class="table-thead">
+                <tr>
+                    <th scope="col">Дата</th>
+                    <th scope="col">Тип оборудования</th>
+                    <th scope="col">Производитель</th>
+                    <th scope="col">Модель</th>
+                    <th scope="col">Серийный номер</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Здание</th>
+                    <th scope="col">Кабинет</th>
+                    <th scope="col">Сотрудник</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody class="test">
+                {% for a in page %}
+                <tr>
+                    <td class="col-div"><a href="{% url 'update' a.id %}">{{a.date}}</a></td>
+                    <td class="col-div">{{a.type_dev}}</td>
+                    <!--<th>{{a.organization}}</th>-->
+                    <td class="col-div">{{a.vendor}}</td>
+                    <td class="col-div">{{a.model}}</td>
+                    <td class="col-div">{{a.serial_number}}</td>
+                    <!--th>{{a.inv_number}}</th>-->
+                    <td class="col-div">{{a.status}}</td>
+                    <td class="col-div">{{a.buildings}}</td>
+                    <td class="col-div">{{a.room}}</td>
+                    <td class="col-div">{{a.employ}}</td>
+                    <td class="col-div">
+                        <a href="{% url 'delete' a.id %}">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <!--th>{{a.note}}</th>
+                    <th>{{a.seller}}</th>
+                    <th>{{a.date_of_sale}}</th>
+                    <th>{{a.MOL}}</th>-->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="popup" id="change">
+    <div class="popup__overlay">
+        <div class="popup__body">
+            {% if errors %}
+            <div class="message">
+                <div class="error">
+                    {{errors}}
+                </div>
+            </div>
+            {% endif %}
+            <a href="{% url 'hardware' %}" class="popup__close">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+            {% if update %}
+            <div class="upd">
+                <form autocomplete="on" action=""  method="POST">
+                    {% csrf_token %}
+                    {{ update.management_form }}
+                    {% for f in update %}
+                    {% if f.label == 'Type dev' or f.label == 'Buildings' or f.label == 'Employ'%}
+                    <div class="form-row">
+                        {{f.label_tag}}
+                        <input type="hidden" id="{{ f.label }}">
+                        {{ f }}
+                    </div>
+                    {% else %}
+                    <div class="form-row">
+                        {{f.label_tag}}
+                        {{ f }}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    <div class="form-submit-row"><input class="search-button" type="submit", value="Update"></div>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="popup" id="delete">
+    <div class="popup__overlay">
+        <div class="popup__body delete">
+            <a href="{% url 'hardware' %}" class="popup__close">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+            {% if delete %}
+            <div class="delete-confirm">
+               <h2 class="del">удалить оборудование?</h2>
+               <p>Производитель:    {{delete.vendor}}</p>
+               <p>Серийный номер:   {{delete.serial_number}}</p>
+            </div> 
+            {% endif %}
+            <div class="delete-submit">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <a class="search-button" href="{ url 'hardware' }">Cancel</a>
+                    <input class="search-button" type="submit" name="Delete" value="Delete">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container clearfix">
+    <nav aria-label="...">
+        <ul class="pagination clearfix">
+            <li class="page-item disabled">
+                <a class="page-link" href="{{ page_prev }}" tabindex="-1">Previous</a>
+            </li>
+            {% for a in page.paginator.page_range %}
+            {% if a == page.number %}
+                <li class="page-item active">
+                    <a class="page-link" href="?page={{a}}">{{a}} <span class="sr-only">(current)</span></a>
+                </li>
+            {% elif a > page.number|add:-3 and a < page.number|add:3 %}    
+                <li class="page-item">
+                    <a class="page-link" href="?page={{a}}">{{a}}</a>
+                </li>
+            {% endif %}
+            {% endfor %}
+            <li class="page-item">
+                <a class="page-link" href="{{ page_next }}">Next</a>
+            </li>
+        </ul>
+      </nav>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'dev/js/hardware.js'%}"></script>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'base.html'%}
+{% block head %}
+    <title>
+        Принтеры ГЛК "Роза Хутор"
+    </title>
+{% endblock %}
+{% block content %}
+<div class="container clearfix">
+    <h1>сетевые принтеры</h1>
+</div>
+<div class="container upper clearfix">
+    <div class= "container-inner clearfix">
+        <form class="search-form filter" action="" method="get">
+            {{ filters.form.as_p }}
+            <input class="search-button" type="submit" placeholder="Фильтр"/>
+        </form>
+    </div>    
+</div>
+<div class="container clearfix">
+<div class="container-inner">
+    <table>
+        <thead class="table-thead">
+            <tr>
+                <th scope="col">ПЛОТТЕР</th>
+                <th scope="col">IP</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for a in filters.qs %}
+        {% if a.type_printers == 'ПЛОТТЕР' %}
+        <tr>
+            <td class="col-1"><a href="http://{{ a.IP }}" target="_blank">{{ a.name_printers}}</a></td>
+            <td class="col-2">{{ a.IP }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <table>
+        <thead class="table-thead">
+            <tr>
+                <th scope="col">МФУ</th>
+                <th scope="col">IP</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for a in filters.qs %}
+        {% if a.type_printers == 'МФУ' %}
+        <tr>
+            <td class="col-1"><a href="http://{{ a.IP }}" target="_blank">{{ a.name_printers}}</a></td>
+            <td class="col-2">{{ a.IP }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <table>
+        <thead class="table-thead">
+            <tr>
+                <th scope="col">ПРИНТЕР</th>
+                <th scope="col">IP</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for a in filters.qs %}
+        {% if a.type_printers == 'ПРИНТЕР' %}
+        <tr>
+            <td class="col-1" ><a href="http://{{ a.IP }}" target="_blank">{{ a.name_printers}}</a></td>
+            <td class="col-2">{{ a.IP }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <table>
+        <thead class="table-thead">
+            <tr>
+                <th scope="col">ПРИНТЕР_ППС</th>
+                <th scope="col">IP</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for a in filters.qs %}
+        {% if a.type_printers == 'ППС'%}
+        <tr>
+            <td class="col-1" ><a href="http://{{ a.IP }} target="_blank"">{{ a.name_printers}}</a></td>
+            <td class="col-2">{{ a.IP }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>   
+</div>
+<div class="sidebar">
+    
+</div>
+</div>
+{% endblock %}

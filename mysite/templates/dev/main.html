@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container main clearfix">
+    <div class="container-inner-main">
+        <div class="container-inner-main-title">
+            оборудование
+        </div>
+    </div>
+    <div class="container-inner-main">
+        <div class="container-inner-main-title">
+            <form class="inner_main_row" method="GET">
+                <input class="search-input" name="BGInfo" list="id_bginfo_list">
+                <datalist id="id_bginfo_list">
+                    {% for a in BGUsers %}
+                    <option value="{{ a }}"></option>
+                    {% endfor %}
+                </datalist>
+                <input class="search-button" type="submit" value="BGInfo">
+            </form>
+            <form class="inner_main_row right" method="GET">
+                <input class="search-button" type="submit" name="update" value="Update">
+            </form>
+        </div>
+        <div class="BGInfo_table">
+            {% if BGInfo %}
+            <table>
+                <thead class="table-thead">
+                    <tr>
+                        <th>Date</th>
+                        <th>Hostname</th>
+                        <th>Username</th>
+                        <th>IP_Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in BGInfo %}
+                    <tr>
+                        <td class="col-2">{{ a.Date }}</td>
+                        <td class="col-2">
+                            <input style="width: 70px; border:none; background:transparent;" type="text"
+                                value="{{ a.Host }}">
+                            <button class="search-button copy_btn">
+                                <i class="fa fa-files-o" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                        <td class="col-2">{{ a.User }}</td>
+                        <td class="col-2">{{ a.IP_Address }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="container main clearfix">
+    <div class="container-inner-main">
+        <div class="container-inner-main-title">
+
+        </div>
+    </div>
+    <div class="container-inner-main">
+        <div class="container-inner-main-title">
+            принтеры
+        </div>
+        <div class="flex-wrapper">
+            <div class="slaider-wrapper">
+                {% for a in Toner %}
+                <div class="slaider">
+                    <div class="slaider-title">
+                        <p>{{ a.name_printers }}</p>
+                    </div>
+                    <div class="slaider-table">
+                        <table class="table-slaider">
+                            <tr>
+                                {% if a.toner_black <= 100 and a.toner_black >= 75 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/black/100%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_black < 75 and a.toner_black >= 50 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/black/75%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_black < 50 and a.toner_black >= 25 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/black/50%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_black <= 25 and a.toner_black > 1 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/black/25%.png'%}" alt="">
+                                </td>
+                                {% else %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/black/0%.png'%}" alt="">
+                                </td>
+                                {% endif %}
+                                {% if a.toner_cyan <= 100 and a.toner_cyan >= 75 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/cyan/100%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_cyan < 75 and a.toner_cyan >= 50 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/cyan/75%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_cyan < 50 and a.toner_cyan >= 25 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/cyan/50%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_cyan <= 25 and a.toner_cyan > 1 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/cyan/25%.png'%}" alt="">
+                                </td>
+                                {% else %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/cyan/0%.png'%}" alt="">
+                                </td>
+                                {% endif %}
+                                {% if a.toner_magenta <= 100 and a.toner_magenta >= 75 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/magenta/100%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_magenta < 75 and a.toner_magenta >= 50 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/magenta/75%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_magenta < 50 and a.toner_magenta >= 25 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/magenta/50%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_magenta <= 25 and a.toner_magenta > 1 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/magenta/25%.png'%}" alt="">
+                                </td>
+                                {% else %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/magenta/0%.png'%}" alt="">
+                                </td>
+                                {% endif %}
+                                {% if a.toner_yellow <= 100 and a.toner_yellow >= 75 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/yellow/100%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_yellow < 75 and a.toner_yellow >= 50 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/yellow/75%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_yellow < 50 and a.toner_yellow >= 25 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/yellow/50%.png'%}" alt="">
+                                </td>
+                                {% elif a.toner_yellow <= 25 and a.toner_yellow > 1 %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/yellow/25%.png'%}" alt="">
+                                </td>
+                                {% else %}
+                                <td class="col-slaider">
+                                    <img class="test" src="{% static 'dev/img/yellow/0%.png'%}" alt="">
+                                </td>
+                                {% endif %}
+
+                            </tr>
+                            <tr>
+                                <td class="col-slaider">
+                                    {{ a.toner_black }}%
+                                </td>
+                                <td class="col-slaider">
+                                    {{ a.toner_cyan }}%
+                                </td>
+                                <td class="col-slaider">
+                                    {{ a.toner_magenta }}%
+                                </td>
+                                <td class="col-slaider">
+                                    {{ a.toner_yellow }}%
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'dev/js/index.js' %}"></script>
+{% endblock %}
