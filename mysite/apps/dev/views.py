@@ -59,12 +59,6 @@ def index(request):
 
 
 
-
-
-
-
-
-
 def printers(request):
     f = PrintersFilter(request.GET, queryset = Printers.objects.order_by('name_printers'))
 
