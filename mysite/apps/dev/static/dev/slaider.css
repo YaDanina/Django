@@ -1,0 +1,50 @@
+.flex-wrapper{
+    width: 646px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.slaider-wrapper{
+    margin-top: 3px;
+    display: flex;
+    transition: .5s;
+}
+
+.slaider{
+    padding: 5px;
+    min-width: 215.33px;
+}
+
+.slaider-title{
+    text-align: center;
+}
+
+
+.dots-wrapper{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.ul-dots{
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+.btnPrev{
+    margin: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btnNext{
+    margin: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.btnDisable{
+    color:grey;
+    border: 1px solid grey;
+}

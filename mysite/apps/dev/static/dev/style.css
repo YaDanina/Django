@@ -179,7 +179,7 @@ nav{
 }
 
 .container-inner-main{
-    height: 19em;
+    height: 21em;
     padding: 1em;
     border: 1px solid #ced4da;
     border-radius: 5px;
@@ -447,28 +447,6 @@ table td a:hover{
 .test{
     width: 30px;
     height: 70px;
-}
-
-.slaider{
-    display: inline-block;
-    margin-right: 45px;
-}
-
-.slaider-table{
-    width: 13em;
-}
-.slaider-wrapper{
-    margin-top: 3px;
-    display: flex;
-}
-
-.slaider-title{
-    text-align: center;
-}
-
-.flex-wrapper{
-    overflow: hidden;
-    margin: 0 auto;
 }
 
 
