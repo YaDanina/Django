@@ -7,6 +7,7 @@ from .forms import HardwareForm
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .BGInfo import *
+from printer.printer_snmp import *
 from .SETTING import *
 
 
@@ -14,7 +15,8 @@ from .SETTING import *
 def index(request):
     search_query = request.GET.get('search', '')
     BGInfo_query = request.GET.get('BGInfo')
-    update_query = request.GET.get('update')
+    update_BG_query = request.GET.get('update_BG')
+    update_Toner_query = request.GET.get('update_Toner')
 
     Toner = Printer_Color.objects.all()
 
@@ -38,13 +40,19 @@ def index(request):
             }
         return render(request, 'dev/main.html', context)
       
-    elif update_query:
+    elif update_BG_query:
         CONN = connection_pyodbc()
         CONN_DB = connection(BD)
         users = take_users_from_db_BGInfo(CONN) 
         insert_users_to_db(CONN_DB, users)
 
         return redirect('index')
+    
+    elif update_Toner_query:
+        insert_data_to_db(BD, color = True)
+        
+        return redirect('index')
+
 
     CONN_DB = connection(BD)   
     BGUsers = take_users_from_db(CONN_DB)

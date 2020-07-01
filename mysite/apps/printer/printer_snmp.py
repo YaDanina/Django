@@ -40,8 +40,6 @@ def take_data_from_db(db, color = False):
                 printers.append(list(row))
         return printers
 
-        #alive = check_reachable(printers, ping=True)
-        # result = check_reachable(alive, snmp = True, color=True)
 
 def insert_data_to_db(db, color = False):
     connection = create_connection(db)

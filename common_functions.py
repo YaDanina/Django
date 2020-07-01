@@ -99,7 +99,6 @@ def data_for_db(data, color = False):
         toner_count_magenta = get_snmp(ip, X_Magenta_Current)
         capacity_toner_yellow = get_snmp(ip, X_Yellow_Capacity)
         toner_count_yellow = get_snmp(ip, X_Yellow_Current)
-        # cartridge_type = get_snmp(ip, K_Cartridge)
         buffer = [date, name_printers, 
                     ip, type_printers, 
                     serial_number, 
